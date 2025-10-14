@@ -1,21 +1,29 @@
 class Solution {
 public:
     int characterReplacement(string s, int k) {
-        unordered_map<char, int> freq;
-        int left = 0, max_freq = 0, max_len = 0;
+        vector<int> freq(26, 0);
+        int left = 0, maxCount = 0, maxLength = 0;
 
         for (int right = 0; right < s.size(); right++) {
-            freq[s[right]]++;
-            max_freq = max(max_freq, freq[s[right]]);
+            freq[s[right] - 'A']++;
+            maxCount = max(maxCount, freq[s[right] - 'A']);
 
-            while ((right - left + 1) - max_freq > k) {
-                freq[s[left]]--;
+            while ((right - left + 1) - maxCount > k) {
+                freq[s[left] - 'A']--;
                 left++;
             }
 
-            max_len = max(max_len, right - left + 1);
+            maxLength = max(maxLength, right - left + 1);
         }
 
-        return max_len;
+        return maxLength;
     }
 };
+
+/*
+Time Complexity: O(n)
+Each character is processed at most twice (by left and right pointers).
+
+Space Complexity: O(1)
+Fixed-size frequency array of 26 characters.
+*/
