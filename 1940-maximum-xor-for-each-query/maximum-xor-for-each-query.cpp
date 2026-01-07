@@ -2,17 +2,24 @@ class Solution {
 public:
     vector<int> getMaximumXor(vector<int>& nums, int maximumBit) {
         int n = nums.size();
-        vector<int> answer;
-        int max_possible_val = (1 << maximumBit) - 1;
-        int current_xor_sum = 0;
-        for (int x : nums) {
-            current_xor_sum ^= x;
+
+        vector<int> result(n);
+        int XOR = 0;
+        for(int i = 0; i < n; i++) {
+            XOR ^= nums[i];
         }
-        for (int i = n - 1; i >= 0; i--) {
-            answer.push_back(current_xor_sum ^ max_possible_val);
-            current_xor_sum ^= nums[i];
+
+        int mask = ((1 << maximumBit) - 1);
+
+        for(int i = 0; i < n; i++) {
+            int k = XOR ^ mask; //this will give me the flipped value of XOR i.e. my best K
+            result[i] = k;
+
+            XOR = (XOR ^ nums[n-1-i]);
         }
-        
-        return answer;
+
+        return result;
+
+
     }
 };
