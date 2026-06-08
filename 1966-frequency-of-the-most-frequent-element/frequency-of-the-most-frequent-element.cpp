@@ -10,7 +10,7 @@ public:
    
    for(long long j=0;j<n;j++){
     total+=nums[j];
-    while(j<n && ((nums[j]*(j-i+1)-total)>k) ){
+    while(j<n && ((nums[j]*(j-i+1)-total)>k) && i>=0 &&i<n ){
         total-=nums[i];
         i++;
         
