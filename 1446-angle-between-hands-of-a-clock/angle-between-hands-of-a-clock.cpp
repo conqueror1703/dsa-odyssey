@@ -2,12 +2,12 @@ class Solution {
 public:
     double angleClock(int hour, int minutes) {
     
-        double ans=(30*hour -5.5*minutes);
+        double ans=abs(30*hour -5.5*minutes);
 
-        if(abs(ans)<=180)
-        return abs(ans);
+        if(ans<=180)
+        return (ans);
         else 
-        return (360-abs(ans));
+        return (360-(ans));
         
     }
 };
